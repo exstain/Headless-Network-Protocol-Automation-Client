@@ -28,6 +28,17 @@ client capable of operating continuously on resource-constrained hardware.
 
 ---
 
+## Demo
+
+The client operates entirely through a terminal interface without requiring
+a graphical user interface.
+
+### Terminal Operation
+
+![Terminal Demo](screenshots/terminal-demo.png)
+
+---
+
 ## Key Features
 
 - C/C++ implementation
@@ -49,6 +60,51 @@ client capable of operating continuously on resource-constrained hardware.
 
 ---
 
+## System Architecture
+
+```text
+                    ┌──────────────────────┐
+                    │   Terminal / CLI     │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │ Configuration Layer  │
+                    │                      │
+                    │ Account / Bot Config │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+              ┌────────────────────────────────┐
+              │       Automation Engine        │
+              │                                │
+              │ Movement / Farming / Harvest   │
+              │ PNB / Resource Management      │
+              └───────────────┬────────────────┘
+                              │
+                              ▼
+              ┌────────────────────────────────┐
+              │        Protocol Layer          │
+              │                                │
+              │ Packet Processing              │
+              │ World Data Processing          │
+              │ State / Event Handling         │
+              └───────────────┬────────────────┘
+                              │
+                              ▼
+              ┌────────────────────────────────┐
+              │          ENet Layer            │
+              │                                │
+              │ Network Connection             │
+              │ Send / Receive Events          │
+              └───────────────┬────────────────┘
+                              │
+                              ▼
+                       Network Server
+```
+
+---
+
 ## Technology Stack
 
 | Technology | Purpose |
@@ -58,26 +114,152 @@ client capable of operating continuously on resource-constrained hardware.
 | Linux / Termux | Runtime environment |
 | g++ / clang++ | Compilation |
 | Bash | Build automation |
-| Multithreading | Multiple bot instances |
+| Multithreading | Concurrent bot instances |
 | Mutex | Shared-data synchronization |
+
+---
+
+## Program Lifecycle
+
+```text
+Program Start
+     │
+     ▼
+Initialize Runtime
+     │
+     ▼
+Load Configuration
+     │
+     ▼
+Initialize Network Layer
+     │
+     ▼
+Connect
+     │
+     ├── Failed ──► Retry / Reconnect
+     │
+     ▼
+Authenticate
+     │
+     ├── Failed ──► Recovery / Retry
+     │
+     ▼
+Enter Game
+     │
+     ▼
+Enter Target World
+     │
+     ▼
+Load World Data
+     │
+     ▼
+Process World State
+     │
+     ▼
+Automation
+     │
+     ├── Plant
+     ├── Harvest
+     ├── PNB
+     └── Resource Management
+     │
+     ▼
+Continuous Operation
+     │
+     └── Connection Failure ──► Reconnect
+```
+
+---
+
+## Engineering Challenges
+
+The project involved solving several practical engineering problems during
+development.
+
+### Network Reliability
+
+The client could sometimes remain inactive without receiving a conventional
+disconnect event.
+
+I implemented additional timeout and inactivity detection logic so that the
+client could identify inactive connections and restart the connection
+workflow automatically.
+
+### World Data Processing
+
+World data received from the network was initially decoded incorrectly.
+
+I investigated the byte-level representation of the received data and
+modified the processing logic to correctly interpret the information.
+
+### Race Conditions
+
+During multi-instance operation, concurrent access to shared data caused
+intermittent freezes.
+
+I investigated the concurrency behavior and introduced mutex-based
+synchronization around shared resources.
+
+### Memory Optimization
+
+The client was designed to operate on low-end hardware.
+
+I optimized parts of the implementation to reduce unnecessary memory usage
+and improve stability during long-running operation.
+
+---
+
+## Documentation
+
+More detailed technical documentation is available in the `docs/` directory.
+
+- [System Architecture](docs/architecture.md)
+- [Automation System](docs/automation.md)
+- [Networking & Protocol Processing](docs/networking.md)
+- [Concurrency & Multi-Instance Architecture](docs/concurrency.md)
+- [Performance & Resource Optimization](docs/optimization.md)
+- [Technical Challenges](docs/technical-challenges.md)
+
+---
+
+## Deployment
+
+The client is designed for Linux/Termux environments and can be compiled
+using common C++ toolchains.
+
+Typical build environments include:
+
+- g++
+- clang++
+- build-essential
+- Bash
+
+The application is designed to run without a graphical desktop environment.
+
+---
+
+## Hardware Deployment
+
+The software has also been used on repurposed low-end hardware configured
+to operate as a lightweight continuous automation system.
+
+The deployment concept focuses on:
+
+- Low resource consumption
+- Headless operation
+- Continuous execution
+- Remote or terminal-based management
+- Long-running stability
 
 ---
 
 ## Project Status
 
-The project is actively used as a personal automation system.
+This project remains a personal and actively used system.
 
-The core source code is intentionally kept private because the software
-is still actively used.
+The core source code is intentionally kept private because the software is
+still in active use.
 
-This repository serves as a technical showcase documenting the architecture,
-engineering challenges, development process, and capabilities of the system.
-
-## Demo
-
-### Terminal Operation
-
-The client operates entirely through a terminal interface without requiring
-a graphical user interface.
-
-![Terminal Demo](screenshots/terminal-demo.png)
+This repository serves as a technical portfolio and case study documenting
+the architecture, engineering challenges, development process, and technical
+capabilities of the project.
