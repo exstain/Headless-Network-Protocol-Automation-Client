@@ -15,16 +15,52 @@ world-state processing, pathfinding, and long-running automation workflows.
 
 ## Overview
 
-This project is a personal C/C++ network automation client that I developed
-and extensively modified from an existing open-source codebase.
+This project is a C/C++ network automation client that I developed and
+extensively modified from an existing open-source starting point.
 
-When I first encountered the project, I had limited experience with C/C++.
-I studied the existing implementation, investigated its networking and
-data-processing behavior, and progressively modified and extended it to
-meet my requirements.
+I studied the original implementation, rebuilt parts of its functionality,
+and progressively extended the system with network processing, automation,
+multithreading, reliability mechanisms, and resource optimization.
 
-The resulting system evolved into a headless, multi-instance automation
-client capable of operating continuously on resource-constrained hardware.
+The project evolved into a headless, multi-instance system designed for
+continuous operation on resource-constrained hardware.
+
+---
+
+## Project Highlights
+
+### Network Programming
+
+Built and extended a C/C++ networking system using ENet, including
+application-level packet processing, connection monitoring, and automatic
+reconnection handling.
+
+### Protocol Data Processing
+
+Implemented application-level processing for network data and investigated
+byte-oriented data structures to correctly interpret received world-state
+information.
+
+### Concurrent Automation
+
+Developed a multithreaded architecture capable of running multiple
+automation instances concurrently, with mutex-based synchronization for
+shared resources.
+
+### Reliability Engineering
+
+Implemented timeout and inactivity detection mechanisms to recover from
+network interruptions during long-running operation.
+
+### Resource-Constrained Deployment
+
+Optimized parts of the application for memory usage and designed the system
+to operate without a graphical environment on low-end hardware.
+
+### Practical C/C++ Development
+
+The project became a practical learning environment for C/C++, networking,
+multithreading, debugging, memory management, and Linux/Termux development.
 
 ---
 
@@ -43,6 +79,8 @@ The client has also been deployed on repurposed low-end hardware for
 continuous headless operation.
 
 <img src="screenshots/hardware-deployment.jpg" alt="Low-End Hardware Deployment" width="650">
+
+---
 
 ## Key Features
 
