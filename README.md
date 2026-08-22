@@ -37,6 +37,12 @@ a graphical user interface.
 
 <img src="screenshots/terminal-demo.png" alt="Terminal Demo" width="400">
 
+### Low-End Hardware Deployment
+
+The client has also been deployed on repurposed low-end hardware for
+continuous headless operation.
+
+<img src="screenshots/hardware-deployment.jpg" alt="Low-End Hardware Deployment" width="650">
 ---
 
 ## Key Features
