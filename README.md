@@ -72,3 +72,12 @@ is still actively used.
 
 This repository serves as a technical showcase documenting the architecture,
 engineering challenges, development process, and capabilities of the system.
+
+## Demo
+
+### Terminal Operation
+
+The client operates entirely through a terminal interface without requiring
+a graphical user interface.
+
+![Terminal Demo](screenshots/terminal-demo.png)
