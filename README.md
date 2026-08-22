@@ -35,7 +35,7 @@ a graphical user interface.
 
 ### Terminal Operation
 
-<img src="screenshots/terminal-demo.png" alt="Terminal Demo" width="600">
+<img src="screenshots/terminal-demo.png" alt="Terminal Demo" width="400">
 
 ---
 
